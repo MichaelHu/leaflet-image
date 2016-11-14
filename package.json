@@ -1,6 +1,6 @@
 {
   "name": "leaflet-image-sophon",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "export leaflet maps as images",
   "main": "index.js",
   "scripts": {
