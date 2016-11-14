@@ -239,7 +239,7 @@ exports.process = function(map, callback) {
             , pixelBounds = map.getPixelBounds()
             , minPoint = new L.Point(pixelBounds.min.x, pixelBounds.min.y)
             , pos = pixelPoint.subtract(minPoint)
-            , styles = window.getComputedStyle(ele)
+            , styles = L.Marker.getMarkerStyle( marker )
             ;
 
         canvas.width = dimensions.x;
@@ -285,7 +285,7 @@ exports.process = function(map, callback) {
                 }
 
                 var pixelPoint = map.project(marker.getLatLng())
-                    , styles = window.getComputedStyle( ele )
+                    , styles = L.Marker.getMarkerStyle( marker )
                     , pos = pixelPoint.subtract(minPoint)
                     ;
                 
@@ -476,14 +476,17 @@ exports.getMapSnapshotInfo = function( map ) {
             r = RegExp.$1;
             g = RegExp.$2;
             b = RegExp.$3;
+
+            return (
+                '#' 
+                + ( r - 0 ).toString( 16 )
+                + ( g - 0 ).toString( 16 )
+                + ( b - 0 ).toString( 16 )
+            );
+
         }
 
-        return (
-            '#' 
-            + ( r - 0 ).toString( 16 )
-            + ( g - 0 ).toString( 16 )
-            + ( b - 0 ).toString( 16 )
-        );
+        return rgb;
     }
 
     function collectMarkerInfo( layer ) {
@@ -496,7 +499,7 @@ exports.getMapSnapshotInfo = function( map ) {
         }
 
         var pixelPoint = map.project(marker.getLatLng())
-            , styles = window.getComputedStyle( ele )
+            , styles = L.Marker.getMarkerStyle( marker )
             , pos = pixelPoint.subtract( bounds.min )
             ;
         
